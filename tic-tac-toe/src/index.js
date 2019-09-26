@@ -1,6 +1,18 @@
+/** 
+ * @author [Yash Khatri] 
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+
+/**
+ * Square Function. 
+ * We need not to retain values of squares in State
+ * as it is being passed from Parent Component. Hence. Sqaure 
+ * can be a function and not Component. 
+ * @param {*} props 
+ */
 function Square(props)  {
 
       return (
@@ -12,7 +24,12 @@ function Square(props)  {
       );
     }
   
-  
+  /**
+   * Board Component.
+   * Parent Component for Square Function. 
+   * It passes props to be rendered in the squares in Square 
+   * Function.
+   */
   class Board extends React.Component {
     constructor(props) {
       super(props);
@@ -21,11 +38,14 @@ function Square(props)  {
       };
     }
 
+    //On Clicking Square. This method is called.
     handleClick(i) {
       const squares = this.state.squares.slice();
       squares[i] = 'X';
       this.setState({squares : squares});
     }
+
+    //For rendering Sqaure and passing props.
     renderSquare(i) {
       return (
       <Square 
@@ -34,7 +54,8 @@ function Square(props)  {
       />
   );
     }
-  
+
+    // Renders board.  
     render() {
       const status = 'Next player: X';
   
@@ -61,13 +82,17 @@ function Square(props)  {
     }
   }
   
+  /**
+   * Game Component.
+   * Super Parent Component.
+  */
   class Game extends React.Component {
+    //Renders Game.
     render() {
       return (
         <div className="game">
           <div className="game-board">
             <Board />
-            <ShoppingList/>
           </div>
           <div className="game-info">
             <div>{/* status */}</div>
@@ -78,21 +103,6 @@ function Square(props)  {
     }
   }
   
-  class ShoppingList extends React.Component {
-  render() {
-    return (
-      <div className="shopping-list">
-        <h1>Shopping List for {this.props.name}</h1>
-        <ul>
-          <li>Instagram</li>
-          <li>WhatsApp</li>
-          <li>Oculus</li>
-        </ul>
-      </div>
-    );
-  }
-}
-
   // ========================================
   
   ReactDOM.render(
